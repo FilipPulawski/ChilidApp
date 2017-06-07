@@ -1,0 +1,38 @@
+#mainText{
+    font-family: 'Tabac Bold',serif;
+    font-size: 60px;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.dropdown{
+    margin-bottom: 60px;
+}
+
+.dropdown-menu{
+    float: left;
+    margin-right:-10px;
+}
+.dropdown-menu li{
+    padding: 5px;
+}
+
+.dropdown-menu > li > input{
+    float: right;
+}
+
+th{
+  cursor: pointer;  
+}
+
+.paginationBtn{
+    background-color: white; /* Green */
+    border-color: black;
+    border-width: 1px;
+    color: black;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}

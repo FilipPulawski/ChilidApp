@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Beauty & the Beast Staff</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    </head>
+    <!-- Added Angular model and controller -->
+    <body ng-app="manageStaff" ng-controller="MainController" >
+        <div class="container-fluid">
+            <div class="col-md-12" id="mainText">Beauty & the Beast Staff</div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Filter dropdown menu -->
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle col-md-2 col-md-offset-4" type="button" data-toggle="dropdown">Filter
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <form id="myForm">
+                        <li>Id: <input type="number" ng-model="filterOptions.id"></li>
+                        <li>First name: <input class="inputDropdown" type="text" ng-model="filterOptions.firstName"></li>
+                        <li>Last name: <input type="text" ng-model="filterOptions.lastName"></li>
+                        <li>Date of birth: <input type="text" id="datepicker" ng-model="filterOptions.dateOfBirth"></li>
+                        <li>Function: <input type="text" ng-model="filterOptions.function"></li>
+                        <li>Experience: <input type="number" ng-model="filterOptions.experience"></li>
+                        <li><button type='button' ng-click="filterReset()">Clear</button><button type='button' ng-click="filter()">Apply</button></li>
+                        </form>
+                    </ul>
+                    <button type="button" class="btn btn-info btn-md col-md-2" data-toggle="modal" data-target="#myModal">Help</button>
+                </div>
+                
+                <!-- Added modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Instructions</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Click on any table header to sort table by that variable.</p>
+                                <p>Click <kbd>filter</kbd> and <kbd>apply</kbd> to rule out variables not matching given criterion.</p>
+                                <p>Click <kbd>filter</kbd> and <kbd>clear</kbd> to reset table.
+                                <p>Click on the number in the bottom of the page to show another pages.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Table with staff -->
+        <div class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th ng-click="sortBy('id')">Id</th>
+                                <th ng-click="sortBy('firstName')">First Name</th>
+                                <th ng-click="sortBy('lastName')">Last Name</th>
+                                <th ng-click="sortBy('dateOfBirth')">Date of Birth</th>
+                                <th ng-click="sortBy('function')">Function</th>
+                                <th ng-click="sortBy('experience')">Experience</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr worker-info ng-repeat="worker in visiblePage" worker="worker">
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="container-fluid">
+                        <div class="row">
+                            <p id="pagination"></p>
+                            <button class="paginationBtn" ng-click="changePage(0)">1</button>
+                            <button class="paginationBtn" ng-click="changePage(1)">2</button>
+                            <button class="paginationBtn" ng-click="changePage(2)">3</button>
+                        </div>
+                        </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modules -->
+        <script src="js/app.js"></script>
+
+        <!-- Controllers -->
+        <script src="js/controllers/MainController.js"></script>
+        
+        <!-- Directives -->
+        <script src="js/directives/workerInfo.js"></script>
+
+        <!-- Services --> 
+        <script src="js/services/sorting.js"></script>
+        <script src="js/services/filtering.js"></script>
+
+        <!-- JQuery functions -->
+        <script>
+            //Show datepicker
+            $( function() {
+                $( "#datepicker" ).datepicker();
+            });
+         </script>
+        
+    </body>
+</html>
